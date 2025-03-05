@@ -94,6 +94,8 @@ import { Button } from 'primereact/button';
 const LazyGrade = React.lazy(() => import('./Components/Grades'));
 const LazyHome = React.lazy(() => import('./Components/Home'));
 const LazyLogOut = React.lazy(() => import('./Components/LogOut'));
+const LazyRegister = React.lazy(() => import('./Components/Register'));
+
 
 function App() {
   const [name, setName] = useState("UserName");
@@ -169,7 +171,7 @@ function App() {
           <Route path='/Home' element={<Suspense fallback="loading..."><LazyHome /></Suspense>} />
           <Route path='/Grades' element={<Suspense fallback="loading..."><LazyGrade /></Suspense>} />
           <Route path='/LogOut' element={<Suspense fallback="loading..."><LazyLogOut /></Suspense>} />
-          <Route path='/Register' element={<div>Registration Page</div>} />
+          <Route path='/Register' element={<Suspense fallback="loading..."><LazyRegister /></Suspense>} />
         </Routes>
       </userName.Provider>
     </div>
