@@ -40,9 +40,8 @@ const updateUser = async (req, res) => {
 //register
 
 const register = async (req, res) => {
-    
+    console.log("jjj");
     const {  password, name, email, phone } = req.body
-    
     if (!name || !password||!email) {
         return res.status(400).json({ message: 'All fields are required' })
     }
@@ -88,7 +87,7 @@ const login = async (req, res) => {
         email: foundUser.email,
         phone: foundUser.phone,
         roles:foundUser.roles
-        
+
     }
         
         const accessToken = jwt.sign(NewUser, process.env.ACCESS_TOKEN_SECRET)

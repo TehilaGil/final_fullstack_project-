@@ -90,18 +90,22 @@ import { Menubar } from 'primereact/menubar';
 import { useNavigate } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { Button } from 'primereact/button';
+import UserProvider from './Context/Provider';
 
 const LazyGrade = React.lazy(() => import('./Components/Grades'));
 const LazyHome = React.lazy(() => import('./Components/Home'));
 const LazyLogOut = React.lazy(() => import('./Components/LogOut'));
 const LazyRegister = React.lazy(() => import('./Components/Register'));
-
+const LazyLogin= React.lazy(() => import('./Components/login'));
 
 function App() {
+  const [user, setUser] = useState();
   const [name, setName] = useState("UserName");
   const [menuVisible, setMenuVisible] = useState(false); // מצב הצגת התפריט
   const navigate = useNavigate();
-
+  const setUserCallback = (user) => {
+    setUser(user);
+  }
   // הגדרת אפשרויות בתפריט הירידה (Register, LogOut)
   const userMenu = [
     {
@@ -157,6 +161,12 @@ function App() {
       command: () => {
         navigate('./Grades');
       }
+    },{ 
+      label: 'log in',
+      icon: 'pi pi-user',
+      command: () => {
+        navigate('./Login');
+      }
     }
   ];
 
@@ -165,16 +175,18 @@ function App() {
       <div className="card">
         <Menubar model={items} end={end} />
       </div>
+      <UserProvider  userCon={user}>
 
-      <userName.Provider value={{ name, setName }}>
         <Routes>
+
+          <Route path='/Login'  setUser={"setUserCallback"} element={<Suspense fallback="loading..."><LazyLogin /></Suspense>} />
           <Route path='/Home' element={<Suspense fallback="loading..."><LazyHome /></Suspense>} />
           <Route path='/Grades' element={<Suspense fallback="loading..."><LazyGrade /></Suspense>} />
           <Route path='/LogOut' element={<Suspense fallback="loading..."><LazyLogOut /></Suspense>} />
           <Route path='/Register' element={<Suspense fallback="loading..."><LazyRegister /></Suspense>} />
         </Routes>
-      </userName.Provider>
-    </div>
+        </UserProvider>
+        </div>
   );
 }
 

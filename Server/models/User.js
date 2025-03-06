@@ -39,8 +39,8 @@ const userSchema = new mongoose.Schema({
     },
 
     confirm: {
-        type: Boolean
-        // ,defult: false ?
+        type: Boolean,
+        defult: false
     }
     
 

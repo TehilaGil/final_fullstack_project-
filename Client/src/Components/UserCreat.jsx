@@ -49,7 +49,7 @@ return(
                         <InputText id="name" label="name" className="bg-white-alpha-20 border-none p-3 text-primary-50" ref={passwordRef}></InputText>
                     </div>
                     <div className="flex align-items-center gap-2">
-                        <Button label="Creat" onClick={(e) =>{ createUser(nameRef,emailRef,addressRef,phoneRef); hide(e)}} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"></Button>
+                        <Button label="Creat" onClick={(e) =>{ createUser(nameRef,emailRef,phoneRef,passwordRef); hide(e)}} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"></Button>
                         <Button label="Cancel" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"></Button>
                     </div>
                 </div>
