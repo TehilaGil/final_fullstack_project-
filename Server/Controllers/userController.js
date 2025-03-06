@@ -88,6 +88,7 @@ const login = async (req, res) => {
         email: foundUser.email,
         phone: foundUser.phone,
         roles:foundUser.roles
+        
     }
         
         const accessToken = jwt.sign(NewUser, process.env.ACCESS_TOKEN_SECRET)

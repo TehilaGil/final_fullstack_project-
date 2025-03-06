@@ -29,18 +29,17 @@ const Users = () => {
     }
 
     //******POST - createUser***** */
-    const createUser = async (nameRef,usernameRef,emailRef,addressRef,phoneRef) => {
+    const createUser = async (nameRef,emailRef,phoneRef,passwordRef) => {
         
         const newUser={
         name: nameRef.current.value?nameRef.current.value:" ",
-        username:usernameRef.current.value?usernameRef.current.value:" ",
         email : emailRef.current.value?emailRef.current.value:"",
-        address: addressRef.current.value?addressRef.current.value:"",
-        phone: phoneRef.current.value?phoneRef.current.value:" "
+        phone: phoneRef.current.value?phoneRef.current.value:" ",
+        password :passwordRef.current.value?passwordRef.current.value:" "
 }
     
     try {
-        const res = await axios.post('http://localhost:7000/user', newUser)
+        const res = await axios.post('http://localhost:7000/api/user', newUser)
         if (res.status === 200) {
            
             console.log("res.data",res.data);
@@ -60,13 +59,14 @@ const Users = () => {
 
     return (<>
         
-        <Button icon="pi pi-plus" aria-label="Filter" onClick={() =>setVisibleCreatUser(true)} />
-        <CreatUser createUser={createUser} setVisibleCreatUser={setVisibleCreatUser}  visibleCreatUser={visibleCreatUser}/>
+        {/* <Button icon="pi pi-plus" aria-label="Filter" onClick={() =>setVisibleCreatUser(true)} />
+        <CreatUser createUser={createUser} setVisibleCreatUser={setVisibleCreatUser}  visibleCreatUser={visibleCreatUser}/> */}
 
         {
             usersData ? 
-                usersData.sort((user1,user2)=>user1._id-user2._id).map((u) => { return <User user={u} getUsers={getUsers} setUsersData={setUsersData}/> }) : null
+                usersData.sort((user1,user2)=>user1.createdAt-user2.createdAt).map((u) => { return <User user={u} getUsers={getUsers} setUsersData={setUsersData}/> }) : null
         }
+
     </>)
 }
 
